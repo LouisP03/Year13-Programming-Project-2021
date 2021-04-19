@@ -1,0 +1,24 @@
+{
+  "name": "year13-programming-project-2021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LouisP03/Year13-Programming-Project-2021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LouisP03/Year13-Programming-Project-2021/issues"
+  },
+  "homepage": "https://github.com/LouisP03/Year13-Programming-Project-2021#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.0.1"
+  }
+}
