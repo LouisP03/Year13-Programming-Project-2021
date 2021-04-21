@@ -5,9 +5,7 @@
         <title>Compsci Project</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">  
-        <script src="libraries/socket.io.js"></script>
-        <script src="libraries/p5.js"></script>
-        <script src="client.js"></script>
+
         <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
     </head>
     <body>
@@ -59,12 +57,12 @@
             <!--Contains brush properties and block indicating current colour-->
             <div id="property-container">
                 <div id="brush-width-slider-container">
-                    <input type="range" min="1" max="100" value="10" class="slider" id="brush-width"></input>
+                    <input type="range" min="1" max="100" value="10" class="slider" id='brush-width'></input>
                 </div>
                 <div id="brush-colour-slider-container">
-                    <input type="range" min="0" max="255" value="0" class="colourSlider" id="red"></input>
-                    <input type="range" min="0" max="255" value="0" class="colourSlider" id="green"></input>
-                    <input type="range" min="0" max="255" value="0" class="colourSlider" id="blue"></input>
+                    <input type="range" min="0" max="255" value="0" class="colourSlider" id="redSlider"></input>
+                    <input type="range" min="0" max="255" value="0" class="colourSlider" id="greenSlider"></input>
+                    <input type="range" min="0" max="255" value="0" class="colourSlider" id="blueSlider"></input>
                 </div>
                 <div id="colour-block">
                     YOUR COLOUR
@@ -73,6 +71,10 @@
             </div>
 
         </div>
+
+        <script src="libraries/socket.io.js"></script>
+        <script src="libraries/p5.js"></script>
+        <script src="client.js"></script>
     </body>
 </html>
 
