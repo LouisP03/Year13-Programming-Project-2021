@@ -16,6 +16,8 @@ currentColour = {
     B: String(bluevalue)
 };
 
+chosenName = "Louis";
+
 //dropperStatus set to false on page load
 dropperStatus = false;
 
@@ -119,8 +121,8 @@ function sendMessage() {
     //create JavaScript Object that will be sent to server
     var messageData = {
         msg: message,
-        clientName: name,
-        room: roomID
+        clientName: chosenName
+        //room: roomID
     };
 
     //select the chat-dump container (where all messages will be located)
@@ -162,8 +164,8 @@ function mouseDragged() {
         brushWidth: bwidth,
         red: currentColour.R,
         green: currentColour.G,
-        blue: currentColour.B,
-        room: roomID
+        blue: currentColour.B
+        //room: roomID
     };
 
     //sets the properties of the drawing about to take place to current selected properties
@@ -189,7 +191,7 @@ function mouseDragged() {
         pos1.dequeue();
     }
 
-    socket.emit('mouse-dragged', data);
+    socket.emit('mouse-dragged', dragData);
 }
 
 function mousePressed() {
@@ -203,8 +205,8 @@ function mousePressed() {
                 brushWidth: bwidth,
                 red: currentColour.R,
                 green: currentColour.G,
-                blue: currentColour.B,
-                room: roomID
+                blue: currentColour.B
+                //room: roomID
             };
             //if dropper selected, get colour value at mouse position and update currentColour and colour indicators...
             if (dropperStatus === true) {

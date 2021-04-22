@@ -41,19 +41,22 @@ io.sockets.on('connection', (socket) => {
     //upon chat message sent by client...
     socket.on('send-chat-message', (messageData) => {
         //...emit chat message to other clients in room
-        socket.to(GIVENROOM).emit(messageData);
+        //socket.to(GIVENROOM).emit(messageData);
+        socket.broadcast.emit(messageData);
     });
 
     //upon mouse drag event sent by client...
     socket.on('mouse-dragged', (dragData) => {
         //...emit mouse drag data to other clients in room
-        socket.to(GIVENROOM).emit(dragData);
+        //socket.to(GIVENROOM).emit(dragData);
+        socket.broadcast.emit(dragData);
     });
 
     //upon mouse click event sent by client...
     socket.on('mouse-clicked', (clickData) => {
         //...emit mouse clicke event to other clients in room
-        socket.to(GIVENROOM).emit(clickData);
+        //socket.to(GIVENROOM).emit(clickData);
+        socket.broadcast.emit(clickData);
     });
 
 });
