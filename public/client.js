@@ -90,7 +90,7 @@ function setup() {
     //creates a canvas with given dimensions using p5.js, setting parent element to the canvas-container
     var canvas = createCanvas(canvas_width, canvas_height);
     canvas.parent('canvas-container');
-    background(0);
+    background(211);
 
     var socket = io.connect('https://compsci-project-2021.herokuapp.com/');
 };
@@ -192,3 +192,49 @@ function mouseDragged() {
     socket.emit('mouse-dragged', data);
 }
 
+function mousePressed() {
+    //if position of mouse within canvas, perform function
+    if (mouseX >= 0 && mouseX <= canvas_width) {
+        if (mouseY >= 0 && mouseY <= canvas_height) {
+            //data to send to server
+            var clickData = {
+                x: mouseX,
+                y: mouseY,
+                brushWidth: bwidth,
+                red: currentColour.R,
+                green: currentColour.G,
+                blue: currentColour.B,
+                room: roomID
+            };
+            //if dropper selected, get colour value at mouse position and update currentColour and colour indicators...
+            if (dropperStatus === true) {
+                var dropperColour = get(clickData.x, clickData.y);
+
+                document.getElementById('redSlider').value = dropperColour[0];
+                document.getElementById('greenSlider').value = dropperColour[1];
+                document.getElementById('blueSlider').value = dropperColour[2];
+
+                dropperStatus = false;
+
+                currentColour = {
+                    R: String(dropperColour[0]),
+                    G: String(dropperColour[1]),
+                    B: String(dropperColour[2])
+                }
+
+                var newBorderStyle = String(bwidth) + 'px solid rgb(' + currentColour.R + ', ' + currentColour.G + ', ' + currentColour.B + ')';
+                document.getElementById('sub-container').style['border-left'] = newBorderStyle;
+                document.getElementById('sub-container').style['border-right'] = newBorderStyle;
+
+                document.body.style.cursor = 'auto';
+            } else {
+                //... otherwise, if colour dropper not selected, draw a circle at the mouse position with selected width and colour
+                noStroke();
+                fill(clickData.red, clickData.green, clickData.blue);
+                ellipse(clickData.x, clickData.y, clickData.brushWidth, clickData.brushWidth);
+                //emit this event to server
+                socket.emit('mouse-clicked', clickData);
+            }
+        };
+    };
+};
