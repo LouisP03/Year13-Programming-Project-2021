@@ -180,12 +180,12 @@ function mouseDragged() {
     if (pos1.length === 4) {
         noFill();
         beginShape();
-        curveVertex(pos.value(0).x, pos.value(0).y);
-        curveVertex(pos.value(0).x, pos.value(0).y);
-        curveVertex(pos.value(1).x, pos.value(1).y);
-        curveVertex(pos.value(2).x, pos.value(2).y);
-        curveVertex(pos.value(3).x, pos.value(3).y);
-        curveVertex(pos.value(3).x, pos.value(3).y);
+        curveVertex(pos1.value(0).x, pos1.value(0).y);
+        curveVertex(pos1.value(0).x, pos1.value(0).y);
+        curveVertex(pos1.value(1).x, pos1.value(1).y);
+        curveVertex(pos1.value(2).x, pos1.value(2).y);
+        curveVertex(pos1.value(3).x, pos1.value(3).y);
+        curveVertex(pos1.value(3).x, pos1.value(3).y);
         endShape();
 
         //remove the oldest (uneeded) data set from the queue
