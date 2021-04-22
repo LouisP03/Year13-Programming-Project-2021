@@ -94,7 +94,8 @@ function setup() {
     canvas.parent('canvas-container');
     background(211);
 
-    var socket = io.connect('https://compsci-project-2021.herokuapp.com/');
+    //var socket = io.connect('https://compsci-project-2021.herokuapp.com/');
+    socket = io.connect('https://compsci-project-2021.herokuapp.com/');
 };
 
 //this function is called when colour dropper is clicked (to select it)
@@ -176,7 +177,7 @@ function mouseDragged() {
     pos1.enqueue(dragData);
 
     //if queue length is 4 (i.e. there are enough vertices available to create a curve), create curve
-    if (pos.length === 4) {
+    if (pos1.length === 4) {
         noFill();
         beginShape();
         curveVertex(pos.value(0).x, pos.value(0).y);
