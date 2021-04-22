@@ -173,7 +173,7 @@ function mouseDragged() {
     stroke(parseInt(dragData.red), parseInt(dragData.green), parseInt(dragData.blue));
 
     //add data set to queue
-    pos1.enqueue(data);
+    pos1.enqueue(dragData);
 
     //if queue length is 4 (i.e. there are enough vertices available to create a curve), create curve
     if (pos.length === 4) {
