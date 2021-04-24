@@ -89,6 +89,13 @@ function setup() {
         console.log("Brush width: " + String(bwidth));
     });
 
+    //runs when mouseup event detected anywhere within the <body> (i.e., the entire page)
+    document.body.addEventListener('mouseup', () => {
+        console.log("Detected MOUSEUP event.");
+        //clears queue
+        pos1.clear();
+    });
+
     //creates a canvas with given dimensions using p5.js, setting parent element to the canvas-container
     var canvas = createCanvas(canvas_width, canvas_height);
     canvas.parent('canvas-container');
