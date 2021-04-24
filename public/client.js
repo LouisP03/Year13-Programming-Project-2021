@@ -242,6 +242,7 @@ function mousePressed() {
                 noStroke();
                 fill(clickData.red, clickData.green, clickData.blue);
                 ellipse(clickData.x, clickData.y, clickData.brushWidth, clickData.brushWidth);
+                pos1.enqueue(clickData);
                 //emit this event to server
                 socket.emit('mouse-clicked', clickData);
             }
