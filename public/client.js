@@ -104,6 +104,54 @@ function setup() {
 
     //var socket = io.connect('https://compsci-project-2021.herokuapp.com/');
     socket = io.connect('https://compsci-project-2021.herokuapp.com/');
+
+    //this function runs when client receives 'send-chat-message'
+    socket.on('send-chat-message', (messageData) => {
+        //selects the chat-dump container, creates div for new message, gives class name of chat-message
+        var chatDump = document.getElementById('chat-dump');
+        var div  = document.createElement('div');
+        div.classList.add('chat-message');
+        //uses anonymous if no username given
+        if (messageData.clientName === "") {
+            div.innerText = "Anonymous >> " + messageData.msg;
+        } else {
+            div.innerText = messageData.clientName + " >> " + messageData.msg;
+        };
+        //makes the new message div a child of the chat-dump container
+        chatDump.appendChild(div);
+    });
+    /*
+    //this function runs when client receives 'mouse-dragged'
+    socket.on('mouse-dragged', (dragData) => {
+        //sets stroke weight to the other client's brush width
+        strokeWeight(parseInt(messageData.dragData));
+        //sets colour to other client's brush colour
+        stroke(parseInt(dragData.red), parseInt(dragData.green), parseInt(dragData.blue));
+        //draws line between the other client's registered mouse position and the previous mouse position
+        line(parseInt(dragData.x), parseInt(dragData.y), parseInt(dragData.px), parseInt(dragData.py));
+    });*/
+
+    socket.on('mouse-dragged', (dragData) => {
+        //sets stroke weight to the other client's brush width
+        strokeWeight(parseInt(messageData.dragData));
+        //sets colour to other client's brush colour
+        stroke(parseInt(dragData.red), parseInt(dragData.green), parseInt(dragData.blue));
+
+        var pos = dragData.queueObject;
+        if (pos.length === 4) {
+            noFill();
+            beginShape();
+            curveVertex(pos1.value(0).x, pos1.value(0).y);
+            curveVertex(pos1.value(0).x, pos1.value(0).y);
+            curveVertex(pos1.value(1).x, pos1.value(1).y);
+            curveVertex(pos1.value(2).x, pos1.value(2).y);
+            curveVertex(pos1.value(3).x, pos1.value(3).y);
+            curveVertex(pos1.value(3).x, pos1.value(3).y);
+            endShape();
+        }
+        dragData.queueObject
+    });
+
 };
 
 //this function is called when colour dropper is clicked (to select it)
@@ -141,7 +189,7 @@ function sendMessage() {
     //give the new <div> a class of 'chat-message'
     div.classList.add('chat-message');
     //make the message bold
-    div.fontWeight = 'bold';
+    div.style.fontWeight = 'bold';
 
     //if no client name given, set the text of the message to the messge
     //concatenated with a default username anonymous...
