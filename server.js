@@ -46,10 +46,10 @@ io.sockets.on('connection', (socket) => {
     });
 
     //upon mouse drag event sent by client...
-    socket.on('mouse-dragged', (pos1) => {
+    socket.on('mouse-dragged', (payload) => {
         //...emit mouse drag data to other clients in room
         //socket.to(GIVENROOM).emit(dragData);
-        socket.broadcast.emit(pos1);
+        socket.broadcast.emit(payload);
     });
 
     //upon mouse click event sent by client...

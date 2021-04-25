@@ -246,7 +246,9 @@ function mouseDragged() {
         pos1.dequeue();
     }
 
-    socket.emit('mouse-dragged', pos1);
+    var payload = {object: pos1};
+
+    socket.emit('mouse-dragged', payload);
 }
 
 function mousePressed() {
