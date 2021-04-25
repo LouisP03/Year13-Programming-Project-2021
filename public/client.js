@@ -279,7 +279,7 @@ function resetChat() {
 };
 
 //function called when button clicked
-function saveCanvas() {
+function customSaveCanvas() {
     //creates currentDate Object instance of class Date()
     var currentDate = new Date();
     //Retrieve all required values using corresponding class methods
