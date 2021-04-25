@@ -45,11 +45,18 @@ io.sockets.on('connection', (socket) => {
         socket.broadcast.emit(messageData);
     });
 
-    //upon mouse drag event sent by client...
+    /*//upon mouse drag event sent by client...
     socket.on('mouse-dragged', (payload) => {
         //...emit mouse drag data to other clients in room
         //socket.to(GIVENROOM).emit(dragData);
         socket.broadcast.emit(payload);
+    });*/
+
+    //upon mouse drag event sent by client...
+    socket.on('mouse-dragged', (dragData) => {
+        //...emit mouse drag data to other clients in room
+        //socket.to(GIVENROOM).emit(dragData);
+        socket.broadcast.emit(dragData);
     });
 
     //upon mouse click event sent by client...
