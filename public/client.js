@@ -134,11 +134,13 @@ function setup() {
     socket.on('mouse-dragged', (payload) => {
         var array = payload.items;
         console.log(array);
-        var pos = new Queue();
-        pos.queue = array;
+        //var pos = new Queue();
+        //pos.queue = array;
+
+        strokeWeight(array[3].brushWidth);
 
         //sets stroke weight to the other client's brush width
-        strokeWeight(parseInt(pos.value(3).brushWidth));
+        //strokeWeight(parseInt(pos.value(3).brushWidth));
         //sets colour to other client's brush colour
         stroke(parseInt(pos.value(3).red), parseInt(pos.value(3).green), parseInt(pos.value(3).blue));
 
