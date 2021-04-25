@@ -131,11 +131,14 @@ function setup() {
         line(parseInt(dragData.x), parseInt(dragData.y), parseInt(dragData.px), parseInt(dragData.py));
     });*/
 
-    socket.on('mouse-dragged', (pos1) => {
+    socket.on('mouse-dragged', (payload) => {
+        var pos1 = payload.object;
         //sets stroke weight to the other client's brush width
         strokeWeight(parseInt(pos1.value(3).brushWidth));
         //sets colour to other client's brush colour
         stroke(parseInt(pos1.value(3).red), parseInt(pos1.value(3).green), parseInt(pos1.value(3).blue));
+
+
 
         if (pos1.length === 4) {
             noFill();
