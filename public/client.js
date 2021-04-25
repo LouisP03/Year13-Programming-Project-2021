@@ -1,6 +1,6 @@
 //chosen canvas dimensions
-canvas_width = 750;
-canvas_height = 525;
+canvas_width = 650;
+canvas_height = 450;
 canvas_colour = 211;
 
 //value of brush width set to defaut value of slider

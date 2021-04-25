@@ -1,0 +1,53 @@
+body {
+  /*stops panning and scrolling on mobile*/
+  touch-action: none;
+  margin: 0px;
+}
+
+#container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+#sub-container {
+  position: relative;
+  width: 650px;
+  height: auto;
+  padding: 10px;
+  background: #99ffca;
+  text-align: center;
+  margin: 0 auto;
+  border-left: 10px solid rgb(0, 0, 0);
+  border-right: 10px solid rgb(0, 0, 0);
+}
+
+#sidebar-left {
+  position: absolute;
+  background: #ccffe5;
+  height: 100%;
+  width: 15%;
+  padding: 5px;
+  top: 0px;
+  left: 0px;
+}
+
+#sidebar-right {
+  position: absolute;
+  background: #ccffe5;
+  height: 100%;
+  width: 15%;
+  padding: 5px;
+  top: 0px;
+  right: 0px;
+}
+
+#property-container {
+  position: relative;
+  width: 650px;
+  height: 100%;
+  margin: 0 auto;
+  background: blue;
+}
