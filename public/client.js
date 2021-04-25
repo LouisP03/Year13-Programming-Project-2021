@@ -239,6 +239,8 @@ function mouseDragged() {
     //add data set to queue
     pos1.enqueue(dragData);
 
+    var payload = {items: pos1.queue};
+
     //if queue length is 4 (i.e. there are enough vertices available to create a curve), create curve
     if (pos1.length === 4) {
         noFill();
@@ -250,12 +252,10 @@ function mouseDragged() {
         curveVertex(pos1.value(3).x, pos1.value(3).y);
         curveVertex(pos1.value(3).x, pos1.value(3).y);
         endShape();
-
         //remove the oldest (uneeded) data set from the queue
         pos1.dequeue();
     }
     
-    var payload = {items: pos1.queue};
     socket.emit('mouse-dragged', payload);
 }
 
