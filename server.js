@@ -71,7 +71,7 @@ io.sockets.on('connection', (socket) => {
     socket.on('do-canvas-reset', (resetData) => {
         //emit canvas reset event to other clients in room
         //socket.to(GIVENROOM).emit(resetData);
-        socket.broadcast.emit(resetData);
+        socket.broadcast.emit('do-canvas-reset', resetData);
         console.log('A canvas reset has taken place with the following data:');
         console.log('do-canvas-reset', resetData);
     });
