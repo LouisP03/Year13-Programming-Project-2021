@@ -133,7 +133,7 @@ function setup() {
 
     socket.on('mouse-dragged', (pos1) => {
         //sets stroke weight to the other client's brush width
-        strokeWeight(parseInt(pos1.value(3).brushWidth)));
+        strokeWeight(parseInt(pos1.value(3).brushWidth));
         //sets colour to other client's brush colour
         stroke(parseInt(pos1.value(3).red), parseInt(pos1.value(3).green), parseInt(pos1.value(3).blue));
 
