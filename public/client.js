@@ -251,9 +251,8 @@ function mouseDragged() {
         //remove the oldest (uneeded) data set from the queue
         pos1.dequeue();
     }
-
-    var payload = {items: pos1.queue};
-
+    
+    var payload = {items: pos1};
     socket.emit('mouse-dragged', payload);
 }
 
