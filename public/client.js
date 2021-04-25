@@ -159,6 +159,7 @@ function setup() {
 
     //this function runs when client receives 'mouse-clicked'
     socket.on('mouse-clicked', (clickData) => {
+        noStroke();
         //set current colour used by p5.js to the other client's selected colour (in clickData)
         fill(clickData.red, clickData.green, clickData.blue);
         //draw a circle at the coordinates in clickData at the other client's selected brush width
