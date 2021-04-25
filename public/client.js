@@ -138,9 +138,22 @@ function setup() {
         //pos.queue = array;
 
         strokeWeight(array[3].brushWidth);
+        stroke(array[3].red, array[3].green, array[3].blue);
+        
+        if (array.length == 4) {
+            noFill();
+            beginShape();
+            curveVertex(array[0].x, array[0].y);
+            curveVertex(array[0].x, array[0].y);
+            curveVertex(array[1].x, array[1].y);
+            curveVertex(array[2].x, array[2].y);
+            curveVertex(array[3].x, array[3].y);
+            curveVertex(array[3].x, array[3].y);
+            endShape();
+        };
 
-        //sets stroke weight to the other client's brush width
-        //strokeWeight(parseInt(pos.value(3).brushWidth));
+        /*//sets stroke weight to the other client's brush width
+        strokeWeight(parseInt(pos.value(3).brushWidth));
         //sets colour to other client's brush colour
         stroke(parseInt(pos.value(3).red), parseInt(pos.value(3).green), parseInt(pos.value(3).blue));
 
@@ -154,7 +167,7 @@ function setup() {
             curveVertex(pos.value(3).x, pos.value(3).y);
             curveVertex(pos.value(3).x, pos.value(3).y);
             endShape();
-        };
+        };*/
     });
 
 
