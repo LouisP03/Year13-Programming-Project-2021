@@ -133,6 +133,7 @@ function setup() {
 
     socket.on('mouse-dragged', (payload) => {
         var array = payload.items;
+        console.log(array);
         var pos = new Queue();
         pos.queue = array;
 
