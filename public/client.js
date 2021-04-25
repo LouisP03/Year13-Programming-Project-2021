@@ -1,6 +1,7 @@
 //chosen canvas dimensions
 canvas_width = 750;
 canvas_height = 525;
+canvas_colour = '211';
 
 //value of brush width set to defaut value of slider
 bwidth = document.getElementById("brush-width").value;
@@ -99,7 +100,7 @@ function setup() {
     //creates a canvas with given dimensions using p5.js, setting parent element to the canvas-container
     var canvas = createCanvas(canvas_width, canvas_height);
     canvas.parent('canvas-container');
-    background(211);
+    background(canvas_colour);
 
     //var socket = io.connect('https://compsci-project-2021.herokuapp.com/');
     socket = io.connect('https://compsci-project-2021.herokuapp.com/');
@@ -249,3 +250,48 @@ function mousePressed() {
         };
     };
 };
+
+//function called when button clicked
+function resetCanvas() {
+    //retrieves global variable containing current set background colour (default)
+    var resetData = {
+        bgColour: canvas_colour
+    };
+    //changes background colour of canvas to set background colour (hence removing
+    //all current drawing)
+    background(resetData.bgColour);
+    //emits event to server (will allow for every canvas to reset)
+    socket.emit('do-canvas-reset', resetData);
+};
+
+//function called when button clicked
+function resetChat() {
+    //selects the chat dump container (that contains all message <div>s)
+    var chatDump = document.getElementById('chat-dump');
+    //while children (last child) of the chat dump exist(s) (true) (while there are still messages to be cleared)...
+    while (chatDump.lastChild) {
+        //...remove that last child (until there are no more children when lastChild would be null since there
+        //aren't any more children)
+        chatDump.removeChild(chatDump.lastChild)
+    };
+    //emit the chat reset event to the server through socket connection
+    socket.emit('do-chat-reset')
+};
+
+//function called when button clicked
+function saveCanvas() {
+    //creates currentDate Object instance of class Date()
+    var currentDate = new Date();
+    //Retrieve all required values using corresponding class methods
+    var day = currentDate.getDay();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    var hour = currentDate.getHours();
+    var minute = currentDate.getMinutes();
+    var second = currentDate.getSeconds();
+    //Create custom filename based on these values
+    var filename = `Y13_${year}-${month}-${day}-${hour}_${minute}_${second}_canvas`;
+    //built-in p5.js function to save canvas state as png image
+    saveCanvas(filename, 'png');
+};
+

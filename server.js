@@ -54,8 +54,22 @@ io.sockets.on('connection', (socket) => {
 
     //upon mouse click event sent by client...
     socket.on('mouse-clicked', (clickData) => {
-        //...emit mouse clicke event to other clients in room
+        //...emit mouse click event to other clients in room
         //socket.to(GIVENROOM).emit(clickData);
+        socket.broadcast.emit(clickData);
+    });
+
+    //upon canvas reset event sent by client...
+    socket.on('do-canvas-reset', (resetData) => {
+        //emit canvas reset event to other clients in room
+        //socket.to(GIVENROOM).emit(resetData);
+        socket.broadcast.emit(clickData);
+    });
+
+    //upon chat reset event sent by client...
+    socket.on('do-chat-reset', () => {
+        //emit chat reset event to other clients in room
+        //socket.to(GIVENROOM).emit(resetData);
         socket.broadcast.emit(clickData);
     });
 
