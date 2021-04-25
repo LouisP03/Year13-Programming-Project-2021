@@ -240,6 +240,7 @@ function mouseDragged() {
     pos1.enqueue(dragData);
 
     var payload = {items: pos1.queue};
+    socket.emit('mouse-dragged', payload);
 
     //if queue length is 4 (i.e. there are enough vertices available to create a curve), create curve
     if (pos1.length === 4) {
@@ -256,7 +257,6 @@ function mouseDragged() {
         pos1.dequeue();
     }
     
-    socket.emit('mouse-dragged', payload);
 }
 
 function mousePressed() {
