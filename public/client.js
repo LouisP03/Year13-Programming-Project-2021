@@ -132,7 +132,10 @@ function setup() {
     });*/
 
     socket.on('mouse-dragged', (payload) => {
-        var pos1 = payload.object;
+        var array = payload.items;
+        var pos1 = new Queue();
+        pos1.queue = array;
+
         //sets stroke weight to the other client's brush width
         strokeWeight(parseInt(pos1.value(3).brushWidth));
         //sets colour to other client's brush colour
@@ -249,7 +252,7 @@ function mouseDragged() {
         pos1.dequeue();
     }
 
-    var payload = {object: pos1};
+    var payload = {items: pos1.queue};
 
     socket.emit('mouse-dragged', payload);
 }
