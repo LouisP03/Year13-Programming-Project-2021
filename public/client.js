@@ -124,7 +124,7 @@ function setup() {
     //this function runs when client receives 'mouse-dragged'
     socket.on('mouse-dragged', (dragData) => {
         //sets stroke weight to the other client's brush width
-        strokeWeight(parseInt(messageData.dragData));
+        strokeWeight(parseInt(dragData.brushWidth));
         //sets colour to other client's brush colour
         stroke(parseInt(dragData.red), parseInt(dragData.green), parseInt(dragData.blue));
         //draws line between the other client's registered mouse position and the previous mouse position
@@ -154,7 +154,7 @@ function setup() {
         };
     });*/
 
-    
+
 
 
 
