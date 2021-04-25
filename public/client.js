@@ -122,37 +122,37 @@ function setup() {
     });
     
     //this function runs when client receives 'mouse-dragged'
-    socket.on('mouse-dragged', (dragData) => {
+    /*socket.on('mouse-dragged', (dragData) => {
         //sets stroke weight to the other client's brush width
         strokeWeight(parseInt(dragData.brushWidth));
         //sets colour to other client's brush colour
         stroke(parseInt(dragData.red), parseInt(dragData.green), parseInt(dragData.blue));
         //draws line between the other client's registered mouse position and the previous mouse position
         line(parseInt(dragData.x), parseInt(dragData.y), parseInt(dragData.px), parseInt(dragData.py));
-    });
+    });*/
 
-    /*socket.on('mouse-dragged', (payload) => {
+    socket.on('mouse-dragged', (payload) => {
         var array = payload.items;
-        var pos1 = new Queue();
-        pos1.queue = array;
+        var pos = new Queue();
+        pos.queue = array;
 
         //sets stroke weight to the other client's brush width
-        strokeWeight(parseInt(pos1.value(3).brushWidth));
+        strokeWeight(parseInt(pos.value(3).brushWidth));
         //sets colour to other client's brush colour
-        stroke(parseInt(pos1.value(3).red), parseInt(pos1.value(3).green), parseInt(pos1.value(3).blue));
+        stroke(parseInt(pos.value(3).red), parseInt(pos.value(3).green), parseInt(pos.value(3).blue));
 
-        if (pos1.length === 4) {
+        if (pos.length === 4) {
             noFill();
             beginShape();
-            curveVertex(pos1.value(0).x, pos1.value(0).y);
-            curveVertex(pos1.value(0).x, pos1.value(0).y);
-            curveVertex(pos1.value(1).x, pos1.value(1).y);
-            curveVertex(pos1.value(2).x, pos1.value(2).y);
-            curveVertex(pos1.value(3).x, pos1.value(3).y);
-            curveVertex(pos1.value(3).x, pos1.value(3).y);
+            curveVertex(pos.value(0).x, pos.value(0).y);
+            curveVertex(pos.value(0).x, pos.value(0).y);
+            curveVertex(pos.value(1).x, pos.value(1).y);
+            curveVertex(pos.value(2).x, pos.value(2).y);
+            curveVertex(pos.value(3).x, pos.value(3).y);
+            curveVertex(pos.value(3).x, pos.value(3).y);
             endShape();
         };
-    });*/
+    });
 
 
 
@@ -254,8 +254,8 @@ function mouseDragged() {
         pos1.dequeue();
     }
     
-    //var payload = {items: pos1.queue};
-    socket.emit('mouse-dragged', dragData);
+    var payload = {items: pos1.queue};
+    socket.emit('mouse-dragged', payload);
 }
 
 function mousePressed() {

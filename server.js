@@ -42,29 +42,29 @@ io.sockets.on('connection', (socket) => {
     socket.on('send-chat-message', (messageData) => {
         //...emit chat message to other clients in room
         //socket.to(GIVENROOM).emit(messageData);
-        socket.broadcast.emit(messageData);
+        socket.broadcast.emit('send-chat-message', messageData);
     });
 
-    /*//upon mouse drag event sent by client...
+    //upon mouse drag event sent by client...
     socket.on('mouse-dragged', (payload) => {
         //...emit mouse drag data to other clients in room
         //socket.to(GIVENROOM).emit(dragData);
-        socket.broadcast.emit(payload);
-    });*/
+        socket.broadcast.emit('mouse-dragged', payload);
+    });
 
-    //upon mouse drag event sent by client...
+    /*//upon mouse drag event sent by client...
     socket.on('mouse-dragged', (dragData) => {
         //...emit mouse drag data to other clients in room
         //socket.to(GIVENROOM).emit(dragData);
-        socket.broadcast.emit(dragData);
+        socket.broadcast.emit('mouse-dragged', dragData);
         console.log("mouse drag detected");
-    });
+    });*/
 
     //upon mouse click event sent by client...
     socket.on('mouse-clicked', (clickData) => {
         //...emit mouse click event to other clients in room
         //socket.to(GIVENROOM).emit(clickData);
-        socket.broadcast.emit(clickData);
+        socket.broadcast.emit('mouse-clicked', clickData);
     });
 
     //upon canvas reset event sent by client...
@@ -73,7 +73,7 @@ io.sockets.on('connection', (socket) => {
         //socket.to(GIVENROOM).emit(resetData);
         socket.broadcast.emit(resetData);
         console.log('A canvas reset has taken place with the following data:');
-        console.log(resetData);
+        console.log('do-canvas-reset', resetData);
     });
 
     //upon chat reset event sent by client...
