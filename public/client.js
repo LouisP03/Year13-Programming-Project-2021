@@ -131,15 +131,19 @@ function setup() {
         line(parseInt(dragData.x), parseInt(dragData.y), parseInt(dragData.px), parseInt(dragData.py));
     });*/
 
+    //this function runs when client receives 'mouse-dragged'
     socket.on('mouse-dragged', (payload) => {
         var array = payload.items;
         console.log(array);
         //var pos = new Queue();
         //pos.queue = array;
 
+        //sets stroke weight to the other client's brush width
         strokeWeight(array[3].brushWidth);
+        //sets colour to other client's brush colour
         stroke(array[3].red, array[3].green, array[3].blue);
         
+        //if queue length is 4 (i.e. there are enough vertices available to create a curve), create curve
         if (array.length == 4) {
             noFill();
             beginShape();
@@ -151,27 +155,32 @@ function setup() {
             curveVertex(array[3].x, array[3].y);
             endShape();
         };
-
-        /*//sets stroke weight to the other client's brush width
-        strokeWeight(parseInt(pos.value(3).brushWidth));
-        //sets colour to other client's brush colour
-        stroke(parseInt(pos.value(3).red), parseInt(pos.value(3).green), parseInt(pos.value(3).blue));
-
-        if (pos.length === 4) {
-            noFill();
-            beginShape();
-            curveVertex(pos.value(0).x, pos.value(0).y);
-            curveVertex(pos.value(0).x, pos.value(0).y);
-            curveVertex(pos.value(1).x, pos.value(1).y);
-            curveVertex(pos.value(2).x, pos.value(2).y);
-            curveVertex(pos.value(3).x, pos.value(3).y);
-            curveVertex(pos.value(3).x, pos.value(3).y);
-            endShape();
-        };*/
     });
 
+    //this function runs when client receives 'mouse-clicked'
+    socket.on('mouse-clicked', (clickData) => {
+        //set current colour used by p5.js to the other client's selected colour (in clickData)
+        fill(clickData.red, clickData.green, clickData.blue);
+        //draw a circle at the coordinates in clickData at the other client's selected brush width
+        ellipse(clickData.x, clickData.y, clickData.brushWidth, clickData.brushWidth);
+    });
 
+    //this function runs when client receives a reset canvas event
+    socket.on('do-canvas-reset', (resetData) => {
+        //canvas made blank by setting background colour using given reset data
+        background(parseInt(resetData.bgColour));
+    });
 
+    socket.on('do-chat-reset', () => {
+        //selects the chat dump container (that contains all message <div>s)
+        var chatDump = document.getElementById('chat-dump');
+        //while children (last child) of the chat dump exist(s) (true) (while there are still messages to be cleared)...
+        while (chatDump.lastChild) {
+            //...remove that last child (until there are no more children when lastChild would be null since there
+            //aren't any more children)
+            chatDump.removeChild(chatDump.lastChild);
+        };
+    });
 
 
 };
@@ -270,9 +279,9 @@ function mouseDragged() {
         endShape();
         //remove the oldest (uneeded) data set from the queue
         pos1.dequeue();
-    }
+    };
     
-}
+};
 
 function mousePressed() {
     //if position of mouse within canvas, perform function
@@ -343,7 +352,7 @@ function resetChat() {
     while (chatDump.lastChild) {
         //...remove that last child (until there are no more children when lastChild would be null since there
         //aren't any more children)
-        chatDump.removeChild(chatDump.lastChild)
+        chatDump.removeChild(chatDump.lastChild);
     };
     //emit the chat reset event to the server through socket connection
     socket.emit('do-chat-reset')
