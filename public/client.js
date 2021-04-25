@@ -1,7 +1,7 @@
 //chosen canvas dimensions
 canvas_width = 750;
 canvas_height = 525;
-canvas_colour = '211';
+canvas_colour = 211;
 
 //value of brush width set to defaut value of slider
 bwidth = document.getElementById("brush-width").value;
