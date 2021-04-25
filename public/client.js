@@ -97,6 +97,17 @@ function setup() {
         pos1.clear();
     });
 
+    //selects message input box
+    var messageInputElement = document.getElementById('messageEntry');
+    //adds event listener that detects KEYUP
+    messageInputElement.addEventListener('keyup', (e) => {
+        //checks if the key used is the enter key and dynamically clicks on the send button
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            document.getElementById('messageSendButton').click();
+        }
+    });
+
     //creates a canvas with given dimensions using p5.js, setting parent element to the canvas-container
     var canvas = createCanvas(canvas_width, canvas_height);
     canvas.parent('canvas-container');
@@ -207,39 +218,42 @@ function sendMessage() {
     //message retrieved by selecting the message text <input> and getting value
     var message = document.getElementById('messageEntry').value;
     
-    //create JavaScript Object that will be sent to server
-    var messageData = {
-        msg: message,
-        clientName: chosenName
-        //room: roomID
-    };
+    if (message !== "") { // if message is not blank...
+        //create JavaScript Object that will be sent to server
+        var messageData = {
+            msg: message,
+            clientName: chosenName
+            //room: roomID
+        };
 
-    //select the chat-dump container (where all messages will be located)
-    var chatDump = document.getElementById('chat-dump');
-    //create new message <div> container - containing just the text of the message
-    var div = document.createElement('div');
-    //give the new <div> a class of 'chat-message'
-    div.classList.add('chat-message');
-    //make the message bold
-    div.style.fontWeight = 'bold';
+        //select the chat-dump container (where all messages will be located)
+        var chatDump = document.getElementById('chat-dump');
+        //create new message <div> container - containing just the text of the message
+        var div = document.createElement('div');
+        //give the new <div> a class of 'chat-message'
+        div.classList.add('chat-message');
+        //make the message bold
+        div.style.fontWeight = 'bold';
 
-    //if no client name given, set the text of the message to the messge
-    //concatenated with a default username anonymous...
-    if (messageData.clientName === "") {
-        div.innerText = "Anonymous >> " + messageData.msg;
-    } else {
-        ///...otherwise, concatenate message with the chosen username
-        div.innerText = messageData.clientName + " >> " + messageData.msg;
+        //if no client name given, set the text of the message to the messge
+        //concatenated with a default username anonymous...
+        if (messageData.clientName === "") {
+            div.innerText = "Anonymous >> " + messageData.msg;
+        } else {
+            ///...otherwise, concatenate message with the chosen username
+            div.innerText = messageData.clientName + " >> " + messageData.msg;
+        }
+
+        //make the new message div a child of the chat-dump container so it appears within
+        chatDump.appendChild(div);
+        //send the messageData to the server along with the event name so the server knows
+        //how to handle it
+        socket.emit('send-chat-message', messageData);
+        //clear the message input box once message has been sent (which is when this function is called)
+        document.getElementById('messageEntry').value = "";
+    } else { //if message is blank, do nothing
+        return false;
     }
-
-    //make the new message div a child of the chat-dump container so it appears within
-    chatDump.appendChild(div);
-    //send the messageData to the server along with the event name so the server knows
-    //how to handle it
-    socket.emit('send-chat-message', messageData);
-    //clear the message input box once message has been sent (which is when this function is called)
-    document.getElementById('messageEntry').value = "";
-
 };
 
 //called when mouse dragged on canvas
