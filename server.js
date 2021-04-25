@@ -57,6 +57,7 @@ io.sockets.on('connection', (socket) => {
         //...emit mouse drag data to other clients in room
         //socket.to(GIVENROOM).emit(dragData);
         socket.broadcast.emit(dragData);
+        console.log("mouse drag detected");
     });
 
     //upon mouse click event sent by client...
