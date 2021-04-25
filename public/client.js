@@ -131,14 +131,13 @@ function setup() {
         line(parseInt(dragData.x), parseInt(dragData.y), parseInt(dragData.px), parseInt(dragData.py));
     });*/
 
-    socket.on('mouse-dragged', (dragData) => {
+    socket.on('mouse-dragged', (pos1) => {
         //sets stroke weight to the other client's brush width
-        strokeWeight(parseInt(messageData.dragData));
+        strokeWeight(parseInt(pos1.value(3).brushWidth)));
         //sets colour to other client's brush colour
-        stroke(parseInt(dragData.red), parseInt(dragData.green), parseInt(dragData.blue));
+        stroke(parseInt(pos1.value(3).red), parseInt(pos1.value(3).green), parseInt(pos1.value(3).blue));
 
-        var pos = dragData.queueObject;
-        if (pos.length === 4) {
+        if (pos1.length === 4) {
             noFill();
             beginShape();
             curveVertex(pos1.value(0).x, pos1.value(0).y);
@@ -148,8 +147,7 @@ function setup() {
             curveVertex(pos1.value(3).x, pos1.value(3).y);
             curveVertex(pos1.value(3).x, pos1.value(3).y);
             endShape();
-        }
-        dragData.queueObject
+        };
     });
 
 };
@@ -248,7 +246,7 @@ function mouseDragged() {
         pos1.dequeue();
     }
 
-    socket.emit('mouse-dragged', dragData);
+    socket.emit('mouse-dragged', pos);
 }
 
 function mousePressed() {
