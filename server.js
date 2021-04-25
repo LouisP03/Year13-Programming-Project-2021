@@ -63,7 +63,7 @@ io.sockets.on('connection', (socket) => {
     socket.on('do-canvas-reset', (resetData) => {
         //emit canvas reset event to other clients in room
         //socket.to(GIVENROOM).emit(resetData);
-        socket.broadcast.emit(clickData);
+        socket.broadcast.emit(resetData);
         console.log('A canvas reset has taken place with the following data:');
         console.log(resetData);
     });
@@ -72,8 +72,8 @@ io.sockets.on('connection', (socket) => {
     socket.on('do-chat-reset', () => {
         //emit chat reset event to other clients in room
         //socket.to(GIVENROOM).emit(resetData);
-        socket.broadcast.emit(clickData);
-        console.log('A chat reset has taken place.')
+        socket.broadcast.emit('do-chat-reset');
+        console.log('A chat reset has taken place.');
     });
 
 });
