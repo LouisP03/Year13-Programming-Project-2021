@@ -44,9 +44,6 @@ if (validIDS.indexOf(roomID) === -1 || chosenName.length > 12) {
 }
 
 
-//this is used to tell the user what room they're connected to
-document.getElementById('room-info').innerText = `Connected Room: ${roomID}`;
-
 //chosenName = "Louis";
 
 //dropperStatus set to false on page load
@@ -163,8 +160,12 @@ function setup() {
     canvas.parent('canvas-container');
     background(canvas_colour);
 
+    //establish socket connection
     //var socket = io.connect('https://compsci-project-2021.herokuapp.com/');
     socket = io.connect('https://compsci-project-2021.herokuapp.com/');
+
+    //send subscribe event to server that will join user to the room
+    socket.emit('subscribe', roomID);
 
     //this function runs when client receives 'send-chat-message'
     socket.on('send-chat-message', (messageData) => {
@@ -272,8 +273,8 @@ function sendMessage() {
         //create JavaScript Object that will be sent to server
         var messageData = {
             msg: message,
-            clientName: chosenName
-            //room: roomID
+            clientName: chosenName,
+            room: roomID
         };
 
         //select the chat-dump container (where all messages will be located)
@@ -317,8 +318,8 @@ function mouseDragged() {
         brushWidth: bwidth,
         red: currentColour.R,
         green: currentColour.G,
-        blue: currentColour.B
-        //room: roomID
+        blue: currentColour.B,
+        room: roomID
     };
 
     //sets the properties of the drawing about to take place to current selected properties
@@ -359,8 +360,8 @@ function mousePressed() {
                 brushWidth: bwidth,
                 red: currentColour.R,
                 green: currentColour.G,
-                blue: currentColour.B
-                //room: roomID
+                blue: currentColour.B,
+                room: roomID
             };
             //if dropper selected, get colour value at mouse position and update currentColour and colour indicators...
             if (dropperStatus === true) {
@@ -400,7 +401,8 @@ function mousePressed() {
 function resetCanvas() {
     //retrieves global variable containing current set background colour (default)
     var resetData = {
-        bgColour: canvas_colour
+        bgColour: canvas_colour,
+        room: roomID
     };
     //changes background colour of canvas to set background colour (hence removing
     //all current drawing)
@@ -420,7 +422,7 @@ function resetChat() {
         chatDump.removeChild(chatDump.lastChild);
     };
     //emit the chat reset event to the server through socket connection
-    socket.emit('do-chat-reset')
+    socket.emit('do-chat-reset', roomID);
 };
 
 //function called when button clicked

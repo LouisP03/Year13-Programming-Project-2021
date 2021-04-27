@@ -17,3 +17,12 @@ function getForm() {
     //document.getElementById('test').innerText = String(username) + " " + String(radio);
 }
 
+//detect keyup event in body
+document.body.addEventListener('keyup', (e) => {
+    //if keyup event comes from enter key...
+    if (e.keyCode === 13) {
+        //...dynamically click the submit button
+        document.getElementById('formSubmit').click();
+    }
+});
+

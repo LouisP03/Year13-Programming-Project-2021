@@ -38,49 +38,60 @@ io.sockets.on('connection', (socket) => {
         connections.delete(socket);
     });
 
+    //upon subscription event with roomID
+    socket.on('subscribe', (roomID) => {
+        try {
+            //subscribe socket to room
+            socket.join(roomID);
+        } catch(e) {
+            //throw any errors
+            console.log('[Error] ' + e);
+        };
+    });
+
     //upon chat message sent by client...
     socket.on('send-chat-message', (messageData) => {
         //...emit chat message to other clients in room
-        //socket.to(GIVENROOM).emit(messageData);
-        socket.broadcast.emit('send-chat-message', messageData);
+        socket.to(messageData.room).emit('send-chat-message', messageData);
+        //socket.broadcast.emit('send-chat-message', messageData);
     });
 
     //upon mouse drag event sent by client...
-    socket.on('mouse-dragged', (payload) => {
+    socket.on('mouse-dragged', (dragData) => {
         //...emit mouse drag data to other clients in room
-        //socket.to(GIVENROOM).emit(dragData);
-        socket.broadcast.emit('mouse-dragged', payload);
+        socket.to(dragData.room).emit('mouse-dragged', dragData);
+        //socket.broadcast.emit('mouse-dragged', payload);
     });
 
     /*//upon mouse drag event sent by client...
     socket.on('mouse-dragged', (dragData) => {
         //...emit mouse drag data to other clients in room
-        //socket.to(GIVENROOM).emit(dragData);
-        socket.broadcast.emit('mouse-dragged', dragData);
+        socket.to(GIVENROOM).emit(dragData);
+        //socket.broadcast.emit('mouse-dragged', dragData);
         console.log("mouse drag detected");
     });*/
 
     //upon mouse click event sent by client...
     socket.on('mouse-clicked', (clickData) => {
         //...emit mouse click event to other clients in room
-        //socket.to(GIVENROOM).emit(clickData);
-        socket.broadcast.emit('mouse-clicked', clickData);
+        socket.to(clickData.room).emit('mouse-clicked', clickData);
+        //socket.broadcast.emit('mouse-clicked', clickData);
     });
 
     //upon canvas reset event sent by client...
     socket.on('do-canvas-reset', (resetData) => {
         //emit canvas reset event to other clients in room
-        //socket.to(GIVENROOM).emit(resetData);
-        socket.broadcast.emit('do-canvas-reset', resetData);
+        socket.to(resetData.room).emit('do-canvas-reset', resetData);
+        //socket.broadcast.emit('do-canvas-reset', resetData);
         console.log('A canvas reset has taken place with the following data:');
         console.log('do-canvas-reset', resetData);
     });
 
     //upon chat reset event sent by client...
-    socket.on('do-chat-reset', () => {
+    socket.on('do-chat-reset', (roomID) => {
         //emit chat reset event to other clients in room
-        //socket.to(GIVENROOM).emit(resetData);
-        socket.broadcast.emit('do-chat-reset');
+        socket.to(roomID).emit('do-chat-reset');
+        //socket.broadcast.emit('do-chat-reset');
         console.log('A chat reset has taken place.');
     });
 
