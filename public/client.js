@@ -25,6 +25,14 @@ const urlParams = new URLSearchParams(queryString);
 roomID = urlParams.get('roomID');
 chosenName = urlParams.get('username');
 
+//if roomID is null *or* chosenName is null...
+if (!roomID || !chosenName) {
+    //...alert the user with error...
+    alert('Error: missing URL parameters. Redirecting you to home page.');
+    //...redirect to main page
+    window.location.replace('https://compsci-project-2021.herokuapp.com/index.html');
+}
+
 //list of valid roomIDs
 var validIDS = ['room1', 'room2', 'room3', 'room4', 'room5'];
 //if roomID doesn't exist within validIDS *or* username length is less than 12...
