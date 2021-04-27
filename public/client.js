@@ -17,10 +17,15 @@ currentColour = {
     B: String(bluevalue)
 };
 
+//get the query string from the URL: ?roomID=room0&username=EXAMPLE
 const queryString = window.location.search;
+//create URLSearchParams object using the query string
 const urlParams = new URLSearchParams(queryString);
+//retrieve the key-value pairs and assign to global variables that will be used in code
 roomID = urlParams.get('roomID');
 chosenName = urlParams.get('username');
+//this is used to tell the user what room they're connected to
+document.getElementById('room-info').innerText = `Connected Room: ${roomID}`;
 
 //chosenName = "Louis";
 
