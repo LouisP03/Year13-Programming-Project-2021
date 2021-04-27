@@ -1,7 +1,17 @@
+:root {
+  /*set to 0 meaning default colours of each slider
+    thumb are black rgb(0, 0, 0) which is default brush
+    colour on page load.*/
+  --bg-red: 0;
+  --bg-green: 0;
+  --bg-blue: 0;
+}
+
 body {
   /*stops panning and scrolling on mobile*/
   touch-action: none;
   margin: 0px;
+  font-family: "Poppins", sans-serif;
 }
 
 #container {
@@ -14,7 +24,7 @@ body {
 
 #sub-container {
   position: relative;
-  width: 650px;
+  width: 700px;
   height: auto;
   padding: 10px;
   background: #99ffca;
@@ -28,7 +38,7 @@ body {
   position: absolute;
   background: #ccffe5;
   height: 100%;
-  width: 15%;
+  width: 18%;
   padding: 5px;
   top: 0px;
   left: 0px;
@@ -38,7 +48,7 @@ body {
   position: absolute;
   background: #ccffe5;
   height: 100%;
-  width: 15%;
+  width: 18%;
   padding: 5px;
   top: 0px;
   right: 0px;
@@ -46,8 +56,199 @@ body {
 
 #property-container {
   position: relative;
-  width: 650px;
+  width: 700px;
   height: 100%;
   margin: 0 auto;
-  background: blue;
+  margin-top: 45px;
+  background: white;
+}
+
+#button-container {
+  position: relative;
+  width: 100%;
+  height: 20%;
+}
+
+.buttons {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background: white;
+  border: 2px solid black;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.buttons:hover {
+  background: hsl(0, 0%, 95%);
+  transition: 0.2s;
+}
+
+#info-container {
+  position: relative;
+  padding: 5px;
+  top: 10px;
+  font-size: 12px;
+}
+
+.info {
+  padding: 10px;
+  border-bottom: 2px solid black;
+}
+
+#chatbox-container {
+  position: absolute;
+  width: 96%;
+  height: 80%;
+  margin: 0 auto;
+  top: 5%;
+  font-family: monospace;
+  font-size: 12px;
+  background: white;
+  border: 2px solid black;
+}
+
+#chat-dump {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  word-wrap: break-word;
+  padding: 5px;
+  top: 5px;
+}
+
+#messageEntry {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  border: 2px solid black;
+  color: black;
+  top: 87%;
+  width: 98%;
+}
+
+#messageSendButton {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  border: 2px solid black;
+  background: white;
+  color: black;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  top: 87%;
+  width: 101%;
+  margin-top: 2px;
+}
+
+.slider,
+.colourSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: #cccccc;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.colourSlider:hover {
+  opacity: 1;
+}
+
+.colourSlider#redSlider {
+  background: #ff9999 !important;
+}
+
+.colourSlider#greenSlider {
+  background: #99ff99 !important;
+}
+
+.colourSlider#blueSlider {
+  background: #9999ff !important;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: black;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: black;
+  cursor: pointer;
+}
+/*------------------------------------------------------*/
+
+.colourSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.colourSlider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/*RED*/
+.colourSlider#redSlider::-webkit-slider-thumb {
+  background: rgb(var(--bg-red), 0, 0);
+}
+
+.colourSlider#redSlider::-moz-range-thumb {
+  background: rgb(var(--bg-red), 0, 0);
+}
+
+/*GREEN*/
+.colourSlider#greenSlider::-webkit-slider-thumb {
+  background: rgb(0, var(--bg-green), 0);
+}
+
+.colourSlider#greenSlider::-moz-range-thumb {
+  background: rgb(0, var(--bg-green), 0);
+}
+
+/*BLUE*/
+.colourSlider#blueSlider::-webkit-slider-thumb {
+  background: rgb(0, 0, var(--bg-blue));
+}
+
+.colourSlider#blueSlider::-moz-range-thumb {
+  background: rgb(0, 0, var(--bg-blue));
+}
+
+#colour-block {
+  width: 100%;
+  height: 20px;
+  text-align: center;
+  font-size: 12px;
+  background: black;
+  color: white;
+  border: 1px solid black;
+  text-shadow: 2px 2px 2px #000000;
+}
+
+#dropperImg {
+  position: relative;
+  left: -15%;
+  bottom: 12%;
 }

@@ -62600,7 +62600,7 @@
            * @example
            * <div><code class='norender'>
            * let myDiv = createDiv('I like pandas.');
-           * myDiv.style('font-size', '18px');
+           * myDiv.style('font-size', '20px');
            * myDiv.style('color', '#ff0000');
            * </code></div>
            * <div><code class='norender'>

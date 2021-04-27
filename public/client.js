@@ -1,7 +1,7 @@
-//chosen canvas dimensions
-canvas_width = 650;
-canvas_height = 450;
-canvas_colour = 211;
+//chosen canvas properties
+canvas_width = 700;
+canvas_height = 500;
+canvas_colour = 255;
 
 //value of brush width set to defaut value of slider
 bwidth = document.getElementById("brush-width").value;
@@ -71,12 +71,28 @@ function setup() {
             var greenvalue = document.getElementById('greenSlider').value;
             var bluevalue = document.getElementById('blueSlider').value;
 
+            //functions that change the colour of the slider thumbs using dynamic CSS variables
+            redVarSet(redvalue);
+            greenVarSet(greenvalue);
+            blueVarSet(bluevalue);
+
+            //this changes the background property of the CSS style of colour-block to new brush colour
+            var r = String(redvalue);
+            var g = String(greenvalue);
+            var b = String(bluevalue);
+            document.getElementById('colour-block').style.background = `rgb(${r}, ${g}, ${b})`;
+
+            //this changes the colour of the left and right borders on the sub-container
+            document.getElementById('sub-container').style['border-left'] = `${String(bwidth)}px solid rgb(${r},${g},${b})`;
+            document.getElementById('sub-container').style['border-right'] = `${String(bwidth)}px solid rgb(${r},${g},${b})`;
+
             //all three colour values updated in the global currentColour object.
             currentColour = {
                 R: String(redvalue),
                 G: String(greenvalue),
                 B: String(bluevalue)
             };
+
             console.log("R: " + String(currentColour.R) + ", G: " + String(currentColour.G) + ", B: " + String(currentColour.B));
         });
     });
@@ -87,6 +103,10 @@ function setup() {
         //once an input into the slider is receives, bwidth is set to the new value of the slider,
         //i.e., the new brush width
         bwidth = document.getElementById("brush-width").value;
+        //change the width of the sub-container borders to match new value for brush width
+        document.getElementById('sub-container').style['border-left'] = `${String(bwidth)}px solid rgb(${currentColour.R},${currentColour.G},${currentColour.B})`;
+        document.getElementById('sub-container').style['border-right'] = `${String(bwidth)}px solid rgb(${currentColour.R},${currentColour.G},${currentColour.B})`;
+
         console.log("Brush width: " + String(bwidth));
     });
 
@@ -389,4 +409,19 @@ function customSaveCanvas() {
     //built-in p5.js function to save canvas state as png image
     saveCanvas(filename, 'png');
 };
+
+var root = document.querySelector(':root');
+
+function redVarSet(newValue) {
+    root.style.setProperty('--bg-red', newValue.toString());
+}
+
+function greenVarSet(newValue) {
+    root.style.setProperty('--bg-green', newValue.toString());
+}
+
+function blueVarSet(newValue) {
+    root.style.setProperty('--bg-blue', newValue.toString());
+}
+
 

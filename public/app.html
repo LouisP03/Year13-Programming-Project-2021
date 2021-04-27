@@ -4,7 +4,7 @@
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=0.25">
         <title>Compsci Project</title>
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
     </head>
@@ -12,7 +12,7 @@
         <!--Container for entire page-->
         <div id="container">
             <div id="sub-container">
-                <h1>TITLE</h1>
+                <h1 style="font-family: 'Poppins', sans-serif; font-size: 15px;">Interactive Drawing Application</h1>
                 <!--Below contains the canvas-->
                 <div id="canvas-container">
                     
@@ -23,20 +23,27 @@
             <div id="sidebar-left">
                 <div id="button-container">
                     <div class="divButtons">
-                        <button type="button" class="buttons" onclick="customSaveCanvas();">Save Canvas</button>
+                        <button type="button" class="buttons" onclick="customSaveCanvas();"><strong>Save Canvas</strong></button>
                     </div>
                     <div class="divButtons">
-                        <button type="button" class="buttons" onclick="resetCanvas();">Reset Canvas</button>
+                        <button type="button" class="buttons" onclick="resetCanvas();"><strong>Reset Canvas</strong></button>
                     </div>
                     <div class="divButtons">
-                        <button type="button" class="buttons" onclick="resetChat();">Reset Chat</button>
+                        <button type="button" class="buttons" onclick="resetChat();"><strong>Reset Chat</strong></button>
                     </div>
                 </div>
                 <div id="info-container">
                     <div class="info">
-                        This is some information about the application. This is some information about the application. 
-                        This is some information about the application. This is some information about the application. 
-                        This is some information about the application. This is some information about the application. 
+                        <strong>How to use this app</strong><br/>
+                        Use the top slider to adjust the width of your brush. The three sliders below it adjust the amount of red, green, and blue (respectively) in the final selected colour.
+                        Use the Reset Button above to reset the canvas. Use the Reset Chat button to reset the chat. To use the colour dropper next to the sliders, simply click on it.
+                        Hover over a colour on your canvas to automatically select that colour.<br/>
+                    </div>
+                    <div class="info">
+                        <strong>How this app works</strong><br/>
+                        This app uses the WebSocket protocol to connect users to a central server. When each user/client updates the canvas or the chat, data is sent as events to the server,
+                         which has custom event handlers to broadcast the change data to every user that is connected. 
+                        The WebSocket protocol provides full-duplex communication over a single TCP connection and changes are broadcast in real time to each user.<br/>
                     </div>
                 </div>
             </div>
@@ -47,11 +54,11 @@
                     <div id="chat-dump">
                         
                     </div>
-                    <div id=new-message-container">
-                        <input type="text" autocomplete="off" placeholder="Enter Message" id="messageEntry" name="messageEntry"></input>
-                        <button type="button" onclick="sendMessage();" id="messageSendButton">Send</button>
-                    </div>
                 </div>
+    
+                <input type="text" autocomplete="off" placeholder="Enter Message" id="messageEntry" name="messageEntry"></input>
+                <button type="button" onclick="sendMessage();" id="messageSendButton"><strong>Send</strong></button>
+                
             </div>
 
             <!--Contains brush properties and block indicating current colour-->
