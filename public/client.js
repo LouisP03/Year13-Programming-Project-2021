@@ -24,6 +24,18 @@ const urlParams = new URLSearchParams(queryString);
 //retrieve the key-value pairs and assign to global variables that will be used in code
 roomID = urlParams.get('roomID');
 chosenName = urlParams.get('username');
+
+//list of valid roomIDs
+var validIDS = ['room1', 'room2', 'room3', 'room4', 'room5'];
+//if roomID doesn't exist within validIDS *or* username length is less than 12...
+if (validIDS.indexOf(roomID) === -1 || username.length > 12) {
+    //...alert the user with error...
+    alert('Error: invalid URL parameters. Redirecting you to home page.');
+    //...redirect to main page
+    window.location.replace('https://compsci-project-2021.herokuapp.com/index.html');
+}
+
+
 //this is used to tell the user what room they're connected to
 document.getElementById('room-info').innerText = `Connected Room: ${roomID}`;
 

@@ -7,6 +7,7 @@ function getForm() {
     //if username length is greater than 12...
     if (username.length > 12) {
         //...break out of function/do nothing
+        alert("Your username is invalid. You must enter a username shorter than or exactly 12 characters.");
         return false;
     }
     //form the query string 
