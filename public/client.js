@@ -17,7 +17,12 @@ currentColour = {
     B: String(bluevalue)
 };
 
-chosenName = "Louis";
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+roomID = urlParams.get('roomID');
+chosenName = urlParams.get('username');
+
+//chosenName = "Louis";
 
 //dropperStatus set to false on page load
 dropperStatus = false;
