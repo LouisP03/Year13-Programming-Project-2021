@@ -28,7 +28,7 @@ chosenName = urlParams.get('username');
 //list of valid roomIDs
 var validIDS = ['room1', 'room2', 'room3', 'room4', 'room5'];
 //if roomID doesn't exist within validIDS *or* username length is less than 12...
-if (validIDS.indexOf(roomID) === -1 || username.length > 12) {
+if (validIDS.indexOf(roomID) === -1 || chosenName.length > 12) {
     //...alert the user with error...
     alert('Error: invalid URL parameters. Redirecting you to home page.');
     //...redirect to main page
