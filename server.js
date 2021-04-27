@@ -57,9 +57,9 @@ io.sockets.on('connection', (socket) => {
     });
 
     //upon mouse drag event sent by client...
-    socket.on('mouse-dragged', (dragData) => {
+    socket.on('mouse-dragged', (payload) => {
         //...emit mouse drag data to other clients in room
-        socket.to(dragData.room).emit('mouse-dragged', dragData);
+        socket.to(payload.room).emit('mouse-dragged', payload);
         //socket.broadcast.emit('mouse-dragged', payload);
     });
 

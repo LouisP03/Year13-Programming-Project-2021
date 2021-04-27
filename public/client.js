@@ -329,7 +329,7 @@ function mouseDragged() {
     //add data set to queue
     pos1.enqueue(dragData);
 
-    var payload = {items: pos1.queue};
+    var payload = {items: pos1.queue, room: dragData.room};
     socket.emit('mouse-dragged', payload);
 
     //if queue length is 4 (i.e. there are enough vertices available to create a curve), create curve
