@@ -118,9 +118,8 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   word-wrap: break-word;
-  padding: 5px;
-  top: 5px;
-  bottom: 50px;
+  padding: 10px;
+  top: 0px;
 }
 
 #messageEntry {
