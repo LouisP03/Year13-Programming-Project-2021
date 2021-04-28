@@ -101,7 +101,7 @@ body {
 
 #chatbox-container {
   position: absolute;
-  width: 96%;
+  width: 89%;
   height: 80%;
   margin: 0 auto;
   top: 5%;
@@ -128,7 +128,7 @@ body {
   font-family: "Poppins", sans-serif;
   border: 2px solid black;
   color: black;
-  top: 87%;
+  top: 89%;
   width: 98%;
 }
 
@@ -141,7 +141,7 @@ body {
   align-items: center;
   cursor: pointer;
   text-align: center;
-  top: 87%;
+  top: 89%;
   width: 101%;
   margin-top: 2px;
 }

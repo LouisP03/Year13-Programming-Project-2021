@@ -16,7 +16,7 @@ currentColour = {
     G: String(greenvalue),
     B: String(bluevalue)
 };
-
+/*
 //get the query string from the URL: ?roomID=room0&username=EXAMPLE
 const queryString = window.location.search;
 //create URLSearchParams object using the query string
@@ -41,7 +41,7 @@ if (validIDS.indexOf(roomID) === -1 || chosenName.length > 12) {
     alert('Error: invalid URL parameters. Redirecting you to home page.');
     //...redirect to main page
     window.location.replace('https://compsci-project-2021.herokuapp.com/index.html');
-}
+}*/
 
 
 //chosenName = "Louis";
