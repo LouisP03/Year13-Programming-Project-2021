@@ -181,6 +181,9 @@ function setup() {
         };
         //makes the new message div a child of the chat-dump container
         chatDump.appendChild(div);
+
+        //automatically scroll to bottom
+        chatDump.scrollTop = chatDump.scrollHeight;
     });
     
     //this function runs when client receives 'mouse-dragged'
@@ -302,6 +305,9 @@ function sendMessage() {
         socket.emit('send-chat-message', messageData);
         //clear the message input box once message has been sent (which is when this function is called)
         document.getElementById('messageEntry').value = "";
+
+        //automatically scroll to bottom
+        chatDump.scrollTop = chatDump.scrollHeight;
     } else { //if message is blank, do nothing
         return false;
     }
